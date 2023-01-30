@@ -2,6 +2,10 @@ import { useEffect, useState, useMemo } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./main-page.css";
 import Header from "./header";
+import FeaturedHouse from "./featured-house";
+import SearchResults from "../search-results";
+import HouseFilter from "./house-filter";
+import HouseFromQuery from "../house/HouseFromQuery";
 
 function Index() {
   const [allHouses, setAllHouses] = useState([]);
@@ -23,10 +27,26 @@ function Index() {
   }, [allHouses]);
 
   return (
-    <div className="container">
-      <Header subtitle="Providing Houses all over the World" />
-    </div>
+    <Router>
+      <div className="container">
+        <Header subtitle="Providing Houses all over the World" />
+        <HouseFilter allHouses={allHouses}/>
+        <Switch>
+          <Route path='/searchresults/:country'>
+            <SearchResults allHouses={allHouses}/>
+          </Route>
+
+          <Route path='/house/:id'>
+            <HouseFromQuery allHouses={allHouses}/>
+          </Route>
+
+          <Route path='/'>
+          <FeaturedHouse house={featuredHouse}></FeaturedHouse>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default Index;
