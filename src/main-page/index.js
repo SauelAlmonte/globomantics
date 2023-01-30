@@ -6,6 +6,7 @@ import FeaturedHouse from "./featured-house";
 import SearchResults from "../search-results";
 import HouseFilter from "./house-filter";
 import HouseFromQuery from "../house/HouseFromQuery";
+import inquiry from "../house/Inquiry";
 
 function Index() {
   const [allHouses, setAllHouses] = useState([]);
